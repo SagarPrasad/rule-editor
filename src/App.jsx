@@ -7,14 +7,16 @@ import './App.css'
 
 function App() {
   // Get base path from Vite's BASE_URL (set in vite.config.js)
-  // BASE_URL will be '/rule-editor/' for production, '/' for dev
+  // For local dev, we'll detect if we're in dev mode and use empty basename
   const basePath = import.meta.env.BASE_URL || '/'
-  
-  // Remove trailing slash if present for basename
+  // Remove trailing slash for React Router basename
   const basename = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath
+  // For local development (dev server), use empty basename
+  const isDev = import.meta.env.DEV
+  const routerBasename = isDev ? '' : basename
   
   return (
-    <Router basename={basename}>
+    <Router basename={routerBasename}>
       <div className="App">
         <Routes>
           <Route path="/" element={<Navigate to="/rules" replace />} />
