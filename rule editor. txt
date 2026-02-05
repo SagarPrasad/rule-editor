@@ -1,0 +1,893 @@
+I want to build an rule engine editor for business guy. Where he can come and edit the rule. 
+1. First Page or Tab on selection upon the tenant and some key, it will list down all the rules existing in the system thru and API call. The first page will only list the rule name (like PILOT_RULES mentioned below in SAMPLE_JSON_RULE) and button to edit it or enable or disable it. 
+
+2. Upon click of edit it will move to the next tab with template data (it will be a plain json of attributes which the name of the key or facts in plain enlish and the corresponding json path on which the rules has to be defined.) for the rules. If first time if there is no template it will use the json rule to fetch all the path specfied and define the template and should have a save button which can be saved in DB (thru an API) for next usage with the same JSON rule name. For example following path will populate in the template json and UI
+
+{{"path": "$.orderNo", "name": "Order No"},
+{"path": "$.lines[*].node", "name": "Lines Node"},
+{"path": "$.lines[?(@.fulfillmentNodeType == 'JIT')].order.state, "name": "Lines Order State"}}
+and both should be editable for the user ( text box should have edit button to click to enable the edit option and save the entire template again.)
+
+3. Once the template tab is done, user can switch the rules tab where the actual rules are loaded thru and API, the screen should be very simplistic in business layout for example the attached screen shots. 
+
+it should be collablese boxes for separate sections once for each conditions like single, "or rule", "and rules" and each conditions can be further drill down for the children where business guy can edit / add or delete the conditions and specify the outcomes of the rules on success. Please refer the following java code base  - (/Users/sagar.prasad/Documents/office/code/herald/platform/herald-plt-common/herald-rule-engine-core)  for all conditions / operaters supported. It is a spring / java application / module.
+
+
+4. Once changed. Have a button to test the rule at the bottom which opens a popup or side panel where customer can give the json ( should have a  default json stored along with template ) to populate and upon click it should validate the rule and print the output. It should be again thru an API.
+
+5. You can use either react or electron or any technology to create the ui, keep the env properties file to specify the url and other configurable values. You can mock the screen now. I will later add the URL and contracts to update the UI. Do let me know if you have any questions.
+
+
+We need to create a first screen which will have all the facts or key on which rules can be applied 
+Payload - 
+{
+  "id": "d932d562-6336-4017-87cb-65193bb2d51c",
+  "orderNum": "FN7390702204",
+  "fulfillmentNum": "FO1146564883",
+  "tenantId": "AJIOB2C",
+  "createAt": "2026-02-03T16:22:28+05:30",
+  "shipmentService": false,
+  "orderType": "forward",
+  "paymentType": "COD",
+  "entryType": "Android",
+  "customerName": "abhay ",
+  "customerEmail": "tomarsabh715@gmail.com",
+  "customerPhone": "9412485871",
+  "customerZipCode": "206001",
+  "customerId": "0d090d51-cfeb-4db3-8580-dae3ff9196fa",
+  "priorityCode": 4,
+  "pickingType": "DELIVERY",
+  "subTenant": "FnL",
+  "nodeId": "TG1K",
+  "holdTimeUnit": "MINUTES",
+  "holdTimeDuration": 5,
+  "metaData": {
+    "totalAmount": "null",
+    "source": null,
+    "panPresent": "N",
+    "eventtype": "createorder",
+    "originalFONum": "FO1146564883",
+    "rvpROC": "true",
+    "rtoROC": "true",
+    "rocNotApplicableReason": "ROC Rule result is empty"
+  },
+  "logisticDetail": {
+    "carrier": "SURFACE",
+    "deliveryMethod": "SHP",
+    "scac": "SHADOWFAX"
+  },
+  "fulfillmentOrderLines": [
+    {
+      "id": "4143e955-acf8-4759-b5e6-4e5aca40cbdc",
+      "lineNo": 7,
+      "shipmentQty": 1,
+      "orderedQty": 1,
+      "originalQty": 1,
+      "nodeId": "TG1K",
+      "itemId": "442659509003",
+      "returnItemId": " ",
+      "itemDesc": "Men Regular Fit Zip-Front Bomber Jacket",
+      "itemSize": "L",
+      "sizeFormat": "UNI",
+      "colorCode": "Grey",
+      "segment": "Men",
+      "fashionGrade": "0002",
+      "itemType": "NonHeavy",
+      "giftWrap": false,
+      "mto": false,
+      "orderLineScheduleKey": "202602031622300049571326",
+      "carrierAccountNo": "SURFACE",
+      "carrierServiceCode": "SURFACE",
+      "scac": "SHADOWFAX",
+      "unitOfMeasure": "EACH",
+      "ean": "8905867944011",
+      "promotionTender": "343661145",
+      "reportingHSNCode": "61032200",
+      "taxProductCode": "61032200",
+      "nodeTaxPayerId": "19AABCR1718E1ZM",
+      "brickCode": "830216010",
+      "brandName": "dnmx-for-trends-select",
+      "countryOfOrigin": "IN",
+      "isReturnable": true,
+      "returnWindow": "7",
+      "nodeType": "DC",
+      "promiseShipDate": "2026-02-07T00:00:00+05:30",
+      "expectedDeliveryDate": "2026-02-12T00:00:00+05:30",
+      "originalExpectedDeliveryDate": "2026-02-12T00:00:00+05:30",
+      "originalPromiseShipDate": "2026-02-07T00:00:00+05:30",
+      "itemRestricted": false,
+      "weightUom": "KG",
+      "weight": 0.65,
+      "fulfillmentNodeType": "FnL_SHIP",
+      "linePriceInfo": {
+        "listPrice": 350,
+        "retailPrice": 999,
+        "unitPrice": 350
+      },
+      "item": [
+        {
+          "itemId": "442659509003",
+          "desc": "Men Regular Fit Zip-Front Bomber Jacket",
+          "class": "GOOD",
+          "uom": "EACH",
+          "colorCode": "Grey",
+          "productLine": "830216010",
+          "shortDesc": "Men Regular Fit Zip-Front Bomber Jacket",
+          "eanNo": "8905867944011",
+          "brandName": "DNMX FOR TRENDS SELECT",
+          "hsn": "61032200",
+          "hsnCode": "61032200",
+          "manufactureName": "trendsProductCatalog",
+          "imageURL": "https://assets.ajio.com/medias/sys_master/root/20240920/KNcj/66ed509cf9b8ef490b556354/-473Wx593H-442659509-grey-MODEL.jpg",
+          "imageThumbnailURL": "https://assets.ajio.com/medias/sys_master/root/20240920/KNcj/66ed509cf9b8ef490b556357/-60Wx75H-442659509-grey-MODEL.jpg",
+          "organizationCode": "RIL",
+          "sellerEan": "8905867944011",
+          "dimension": {
+            "height": 7.02,
+            "heightUom": "CM",
+            "length": 24.37,
+            "lengthUom": "CM",
+            "width": 22.82,
+            "widthUom": "CM",
+            "volume": 3903.9863,
+            "volumeUom": "CUCENTIMETER",
+            "weight": 0.65,
+            "weightUom": "KG",
+            "sizeCode": "L",
+            "serialized": false,
+            "componentCount": 1,
+            "countryOfOrigin": "IN",
+            "sizeFormat": "UNI",
+            "itemType": "trendsProductCatalog"
+          }
+        }
+      ],
+      "lineCharges": [
+        {
+          "chargeAmount": 8.32,
+          "chargeCategory": "Shipping",
+          "chargeName": "Shipping",
+          "chargePerLine": 0,
+          "chargePerUnit": 8.32
+        },
+        {
+          "chargeAmount": 649.35,
+          "chargeCategory": "SELLER_PROMO",
+          "chargeName": "AjioPromotion",
+          "chargePerLine": 0,
+          "chargePerUnit": 649.35
+        },
+        {
+          "chargeAmount": 0,
+          "chargeCategory": "SELLER_PROMO",
+          "chargeName": "SellerPromotion",
+          "chargePerLine": 0,
+          "chargePerUnit": 0
+        }
+      ],
+      "address": [
+        {
+          "addressId": "63e517be-ae25-454f-911d-c12ab4cae7e7",
+          "addressType": "BillTo",
+          "firstName": "abhay",
+          "lastName": "",
+          "address1": "sbi ATM wali gali",
+          "address2": "Numbaish chaurah",
+          "address3": "kkdc",
+          "city": "ETAWAH",
+          "company": "",
+          "state": "UP",
+          "country": "IN",
+          "zipCode": "206001",
+          "commercialAddress": false,
+          "phoneNum": "9412485871",
+          "otherPhoneNum": "9412485871",
+          "emailId": "tomarsabh715@gmail.com"
+        },
+        {
+          "addressId": "e864891b-8903-4774-83c2-39ad62a2734a",
+          "addressType": "ShipNodeBillTo",
+          "firstName": "Susabhan",
+          "middleName": "",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "phoneNum": "8509683206",
+          "otherPhoneNum": "",
+          "emailId": "Susabhan.Chandra@ril.com"
+        },
+        {
+          "addressId": "6fc66973-0c95-4bc4-bd5e-06513f147c2f",
+          "addressType": "ShipTo",
+          "firstName": "abhay",
+          "lastName": "",
+          "address1": "sbi ATM wali gali",
+          "address2": "Numbaish chaurah",
+          "address3": "kkdc",
+          "city": "ETAWAH",
+          "state": "UP",
+          "country": "IN",
+          "stateCode": "09",
+          "zipCode": "206001",
+          "phoneNum": "9412485871",
+          "emailId": "tomarsabh715@gmail.com"
+        },
+        {
+          "addressId": "8cf84d91-f158-4c05-9a6c-de3f224d7021",
+          "sellerName": "TG1K",
+          "addressType": "ShipNode",
+          "firstName": "Susabhan",
+          "middleName": "",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "businessType": "TRENDS DC",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "phoneNum": "8509683206",
+          "otherPhoneNum": "",
+          "emailId": "Susabhan.Chandra@ril.com",
+          "gstin": "19AABCR1718E1ZM"
+        }
+      ],
+      "nodeaddress": [
+        {
+          "addressId": "b4a44ec8-234d-4831-bc54-3b52de52ee43",
+          "addressType": "ShipNode",
+          "beeper": "",
+          "firstName": "Susabhan",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "emailId": "Susabhan.Chandra@ril.com",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "mobilePhone": "8509683206"
+        }
+      ],
+      "commercialType": "FnL_SHIP",
+      "productLine": "830216010",
+      "isPriorityDelivery": false,
+      "meta": {
+        "integrationType": "TRENDS DC",
+        "originalDeliverySLA": null
+      }
+    },
+    {
+      "id": "3e89c567-bfbb-4da6-bbe1-4777ae0d4783",
+      "lineNo": 3,
+      "shipmentQty": 1,
+      "orderedQty": 1,
+      "originalQty": 1,
+      "nodeId": "TG1K",
+      "itemId": "443062147005",
+      "returnItemId": " ",
+      "itemDesc": "Women Relaxed Fit High-Neck Sweatshirt",
+      "itemSize": "XL",
+      "sizeFormat": "",
+      "colorCode": "Pink",
+      "segment": "Women",
+      "fashionGrade": "0002",
+      "itemType": "NonHeavy",
+      "giftWrap": false,
+      "mto": false,
+      "orderLineScheduleKey": "202602031622300067222853",
+      "carrierAccountNo": "SURFACE",
+      "carrierServiceCode": "SURFACE",
+      "scac": "SHADOWFAX",
+      "unitOfMeasure": "EACH",
+      "ean": "8909118187356",
+      "promotionTender": "359375062",
+      "reportingHSNCode": "61102000",
+      "taxProductCode": "61102000",
+      "nodeTaxPayerId": "19AABCR1718E1ZM",
+      "brickCode": "830316013",
+      "brandName": "teamspirit",
+      "countryOfOrigin": "IN",
+      "isReturnable": true,
+      "returnWindow": "7",
+      "nodeType": "DC",
+      "promiseShipDate": "2026-02-07T00:00:00+05:30",
+      "expectedDeliveryDate": "2026-02-12T00:00:00+05:30",
+      "originalExpectedDeliveryDate": "2026-02-12T00:00:00+05:30",
+      "originalPromiseShipDate": "2026-02-07T00:00:00+05:30",
+      "itemRestricted": false,
+      "weightUom": "KG",
+      "weight": 0.41,
+      "fulfillmentNodeType": "FnL_SHIP",
+      "linePriceInfo": {
+        "listPrice": 287,
+        "retailPrice": 699,
+        "unitPrice": 287
+      },
+      "item": [
+        {
+          "itemId": "443062147005",
+          "desc": "Women Relaxed Fit High-Neck Sweatshirt",
+          "class": "GOOD",
+          "uom": "EACH",
+          "colorCode": "Pink",
+          "productLine": "830316013",
+          "shortDesc": "Women Relaxed Fit High-Neck Sweatshirt",
+          "eanNo": "8909118187356",
+          "brandName": "Teamspirit",
+          "hsn": "61102000",
+          "hsnCode": "61102000",
+          "manufactureName": "trendsProductCatalog",
+          "imageURL": "https://assets.ajio.com/medias/sys_master/root/20241125/CclV/67444458c148fa1b30e84cea/-473Wx593H-443062147-ltpink-MODEL.jpg",
+          "imageThumbnailURL": "https://assets.ajio.com/medias/sys_master/root/20241125/CclV/67444458c148fa1b30e84cf0/-60Wx75H-443062147-ltpink-MODEL.jpg",
+          "organizationCode": "RIL",
+          "sellerEan": "8909118187356",
+          "dimension": {
+            "height": 5.62,
+            "heightUom": "CM",
+            "length": 22.24,
+            "lengthUom": "CM",
+            "width": 19.82,
+            "widthUom": "CM",
+            "volume": 2477.278,
+            "volumeUom": "CUCENTIMETER",
+            "weight": 0.41,
+            "weightUom": "KG",
+            "sizeCode": "XL",
+            "serialized": false,
+            "componentCount": 1,
+            "countryOfOrigin": "IN",
+            "sizeFormat": "",
+            "itemType": "trendsProductCatalog"
+          }
+        }
+      ],
+      "lineCharges": [
+        {
+          "chargeAmount": 8.28,
+          "chargeCategory": "Shipping",
+          "chargeName": "Shipping",
+          "chargePerLine": 0.02,
+          "chargePerUnit": 8.26
+        },
+        {
+          "chargeAmount": 412.41,
+          "chargeCategory": "SELLER_PROMO",
+          "chargeName": "AjioPromotion",
+          "chargePerLine": 0,
+          "chargePerUnit": 412.41
+        },
+        {
+          "chargeAmount": 0,
+          "chargeCategory": "SELLER_PROMO",
+          "chargeName": "SellerPromotion",
+          "chargePerLine": 0,
+          "chargePerUnit": 0
+        }
+      ],
+      "address": [
+        {
+          "addressId": "63e517be-ae25-454f-911d-c12ab4cae7e7",
+          "addressType": "BillTo",
+          "firstName": "abhay",
+          "lastName": "",
+          "address1": "sbi ATM wali gali",
+          "address2": "Numbaish chaurah",
+          "address3": "kkdc",
+          "city": "ETAWAH",
+          "company": "",
+          "state": "UP",
+          "country": "IN",
+          "zipCode": "206001",
+          "commercialAddress": false,
+          "phoneNum": "9412485871",
+          "otherPhoneNum": "9412485871",
+          "emailId": "tomarsabh715@gmail.com"
+        },
+        {
+          "addressId": "29c4b5f0-ac03-4627-bd59-292d91134962",
+          "addressType": "ShipNodeBillTo",
+          "firstName": "Susabhan",
+          "middleName": "",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "phoneNum": "8509683206",
+          "otherPhoneNum": "",
+          "emailId": "Susabhan.Chandra@ril.com"
+        },
+        {
+          "addressId": "6fc66973-0c95-4bc4-bd5e-06513f147c2f",
+          "addressType": "ShipTo",
+          "firstName": "abhay",
+          "lastName": "",
+          "address1": "sbi ATM wali gali",
+          "address2": "Numbaish chaurah",
+          "address3": "kkdc",
+          "city": "ETAWAH",
+          "state": "UP",
+          "country": "IN",
+          "stateCode": "09",
+          "zipCode": "206001",
+          "phoneNum": "9412485871",
+          "emailId": "tomarsabh715@gmail.com"
+        },
+        {
+          "addressId": "382ef9f7-7b92-4ff3-836a-f919c69b2b4a",
+          "sellerName": "TG1K",
+          "addressType": "ShipNode",
+          "firstName": "Susabhan",
+          "middleName": "",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "businessType": "TRENDS DC",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "phoneNum": "8509683206",
+          "otherPhoneNum": "",
+          "emailId": "Susabhan.Chandra@ril.com",
+          "gstin": "19AABCR1718E1ZM"
+        }
+      ],
+      "nodeaddress": [
+        {
+          "addressId": "7e801ae7-eaac-4b76-af2c-7ea19462a9a4",
+          "addressType": "ShipNode",
+          "beeper": "",
+          "firstName": "Susabhan",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "emailId": "Susabhan.Chandra@ril.com",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "mobilePhone": "8509683206"
+        }
+      ],
+      "commercialType": "FnL_SHIP",
+      "productLine": "830316013",
+      "isPriorityDelivery": false,
+      "meta": {
+        "integrationType": "TRENDS DC",
+        "originalDeliverySLA": null
+      }
+    },
+    {
+      "id": "8fd48e7f-a951-4ab0-8c09-41d69bdf0996",
+      "lineNo": 1,
+      "shipmentQty": 1,
+      "orderedQty": 1,
+      "originalQty": 1,
+      "nodeId": "TG1K",
+      "itemId": "443067331002",
+      "returnItemId": " ",
+      "itemDesc": "Women Mickey Mouse Print Boxy Fit Crew-Neck T-Shirt",
+      "itemSize": "S",
+      "sizeFormat": "",
+      "colorCode": "Off White",
+      "segment": "Women",
+      "fashionGrade": "0004",
+      "itemType": "NonHeavy",
+      "giftWrap": false,
+      "mto": false,
+      "orderLineScheduleKey": "202602031622300042744858",
+      "carrierAccountNo": "SURFACE",
+      "carrierServiceCode": "SURFACE",
+      "scac": "SHADOWFAX",
+      "unitOfMeasure": "EACH",
+      "ean": "8909118547181",
+      "promotionTender": "359375061",
+      "reportingHSNCode": "61091000",
+      "taxProductCode": "61091000",
+      "nodeTaxPayerId": "19AABCR1718E1ZM",
+      "brickCode": "830316018",
+      "brandName": "dnmx",
+      "countryOfOrigin": "IN",
+      "isReturnable": true,
+      "returnWindow": "7",
+      "nodeType": "DC",
+      "promiseShipDate": "2026-02-07T00:00:00+05:30",
+      "expectedDeliveryDate": "2026-02-12T00:00:00+05:30",
+      "originalExpectedDeliveryDate": "2026-02-12T00:00:00+05:30",
+      "originalPromiseShipDate": "2026-02-07T00:00:00+05:30",
+      "itemRestricted": false,
+      "weightUom": "KG",
+      "weight": 0.4,
+      "fulfillmentNodeType": "FnL_SHIP",
+      "linePriceInfo": {
+        "listPrice": 182,
+        "retailPrice": 299,
+        "unitPrice": 182
+      },
+      "item": [
+        {
+          "itemId": "443067331002",
+          "desc": "Women Mickey Mouse Print Boxy Fit Crew-Neck T-Shirt",
+          "class": "GOOD",
+          "uom": "EACH",
+          "colorCode": "Off White",
+          "productLine": "830316018",
+          "shortDesc": "Women Mickey Mouse Print Boxy Fit Crew-Neck T-Shirt",
+          "eanNo": "8909118547181",
+          "brandName": "DNMX",
+          "hsn": "61091000",
+          "hsnCode": "61091000",
+          "manufactureName": "ajioGram",
+          "imageURL": "https://assets.ajio.com/medias/sys_master/root/20250402/zvnv/67ed2f837a6cd4182f9f0538/-473Wx593H-443067331-offwhite-MODEL.jpg",
+          "imageThumbnailURL": "https://assets.ajio.com/medias/sys_master/root/20250402/zvnv/67ed2f837a6cd4182f9f053c/-60Wx75H-443067331-offwhite-MODEL.jpg",
+          "organizationCode": "RIL",
+          "sellerEan": "8909118547181",
+          "dimension": {
+            "height": 5.7,
+            "heightUom": "CM",
+            "length": 21.99,
+            "lengthUom": "CM",
+            "width": 19.28,
+            "widthUom": "CM",
+            "volume": 2416.613,
+            "volumeUom": "CUCENTIMETER",
+            "weight": 0.4,
+            "weightUom": "KG",
+            "sizeCode": "S",
+            "serialized": false,
+            "componentCount": 1,
+            "countryOfOrigin": "IN",
+            "sizeFormat": "",
+            "itemType": "ajioGram"
+          }
+        }
+      ],
+      "lineCharges": [
+        {
+          "chargeAmount": 8.28,
+          "chargeCategory": "Shipping",
+          "chargeName": "Shipping",
+          "chargePerLine": 0.02,
+          "chargePerUnit": 8.26
+        },
+        {
+          "chargeAmount": 116.61,
+          "chargeCategory": "SELLER_PROMO",
+          "chargeName": "AjioPromotion",
+          "chargePerLine": 0,
+          "chargePerUnit": 116.61
+        },
+        {
+          "chargeAmount": 0,
+          "chargeCategory": "SELLER_PROMO",
+          "chargeName": "SellerPromotion",
+          "chargePerLine": 0,
+          "chargePerUnit": 0
+        }
+      ],
+      "address": [
+        {
+          "addressId": "63e517be-ae25-454f-911d-c12ab4cae7e7",
+          "addressType": "BillTo",
+          "firstName": "abhay",
+          "lastName": "",
+          "address1": "sbi ATM wali gali",
+          "address2": "Numbaish chaurah",
+          "address3": "kkdc",
+          "city": "ETAWAH",
+          "company": "",
+          "state": "UP",
+          "country": "IN",
+          "zipCode": "206001",
+          "commercialAddress": false,
+          "phoneNum": "9412485871",
+          "otherPhoneNum": "9412485871",
+          "emailId": "tomarsabh715@gmail.com"
+        },
+        {
+          "addressId": "58238215-57a8-4c8f-ae5b-b09b13562b5c",
+          "addressType": "ShipNodeBillTo",
+          "firstName": "Susabhan",
+          "middleName": "",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "phoneNum": "8509683206",
+          "otherPhoneNum": "",
+          "emailId": "Susabhan.Chandra@ril.com"
+        },
+        {
+          "addressId": "6fc66973-0c95-4bc4-bd5e-06513f147c2f",
+          "addressType": "ShipTo",
+          "firstName": "abhay",
+          "lastName": "",
+          "address1": "sbi ATM wali gali",
+          "address2": "Numbaish chaurah",
+          "address3": "kkdc",
+          "city": "ETAWAH",
+          "state": "UP",
+          "country": "IN",
+          "stateCode": "09",
+          "zipCode": "206001",
+          "phoneNum": "9412485871",
+          "emailId": "tomarsabh715@gmail.com"
+        },
+        {
+          "addressId": "b859621a-96cb-4907-82a2-ce88054d5072",
+          "sellerName": "TG1K",
+          "addressType": "ShipNode",
+          "firstName": "Susabhan",
+          "middleName": "",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "businessType": "TRENDS DC",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "phoneNum": "8509683206",
+          "otherPhoneNum": "",
+          "emailId": "Susabhan.Chandra@ril.com",
+          "gstin": "19AABCR1718E1ZM"
+        }
+      ],
+      "nodeaddress": [
+        {
+          "addressId": "e9f52d67-edfa-4edc-84dc-6e7fded87b43",
+          "addressType": "ShipNode",
+          "beeper": "",
+          "firstName": "Susabhan",
+          "lastName": "",
+          "address1": "Trends Panchla DC",
+          "address2": "Dag No 248 249 250 Khatian No",
+          "address3": "1037 1359, Ps Mouza Surikhali",
+          "emailId": "Susabhan.Chandra@ril.com",
+          "city": "HOWRAH",
+          "company": "",
+          "state": "WB",
+          "country": "IN",
+          "zipCode": "711310",
+          "mobilePhone": "8509683206"
+        }
+      ],
+      "commercialType": "FnL_SHIP",
+      "productLine": "830316018",
+      "isPriorityDelivery": false,
+      "meta": {
+        "integrationType": "TRENDS DC",
+        "originalDeliverySLA": null
+      }
+    }
+  ],
+  "fulfillmentDates": [
+    {
+      "dateType": "expectedDeliveryDate",
+      "value": "2026-02-12T00:00:00+05:30",
+      "reason": "Created"
+    },
+    {
+      "dateType": "promiseShipDate",
+      "value": "2026-02-07T00:00:00+05:30",
+      "reason": "Created"
+    }
+  ]
+}
+
+
+SAMPLE_JSON_RULE ->
+/** 
+* Paste one or more documents here
+*/
+{
+  "ruleId": "PILOT_RULES",
+  "version": 47,
+  "modifiedBy": "anubhav.saxena",
+  "tenantId": "AJIOB2C",
+  "payload": [
+    {
+      "type": "exists",
+      "path": "$.orderNo",
+      "defaultResult": true,
+      "successResult": {
+        "fulfillment": true,
+        "custom": "V0028"
+      },
+      "failureResult": {
+        "fulfillment": false
+      }
+    },
+    {
+      "type": "or",
+      "successResult": {
+        "fulfillment": true
+      },
+      "children": [
+        {
+          "type": "in",
+          "path": "$.email",
+          "values": [
+            "akash.cholkar@ril.com",
+            "rama.kollamsetti@ril.com",
+            "abhishek89.kumar@ril.com"
+          ]
+        },
+        {
+          "type": "contains_any",
+          "path": "$.lines[*].node",
+          "values": [
+            "SL9T"
+          ],
+          "defaultResult": false
+        },
+        {
+          "type": "equals",
+          "path": "$.metaData.panPresent",
+          "value": "Y",
+          "defaultResult": false
+        },
+        {
+          "type": "contains_any",
+          "path": "$.lines[*].lineMetaData['mtoFlag']",
+          "values": [
+            "true"
+          ],
+          "defaultResult": false
+        },
+        {
+          "type": "contains_any",
+          "path": "$.lines[*].lineMetaData['gwpFlag']",
+          "values": [
+            "Y",
+            "N"
+          ],
+          "defaultResult": false
+        },
+        {
+          "type": "contains_any",
+          "path": "$.lines[*].shipNodeIntegrationType",
+          "values": [
+            "HNM",
+            "HnM",
+            "Hnm",
+            "hnm",
+            "SHEIN"
+          ],
+          "defaultResult": false
+        },
+        {
+          "type": "contains_any",
+          "path": "$.lines[*].isPriorityDelivery",
+          "values": [
+            true
+          ],
+          "defaultResult": false
+        }
+      ]
+    },
+    {
+      "type": "contains_any",
+      "successResult": {
+        "fulfillment": false
+      },
+      "path": "$.lines[*].node",
+      "values": [
+        "S944"
+      ],
+      "defaultResult": false
+    },
+    {
+      "type": "and",
+      "successResult": {
+        "fulfillment": true
+      },
+      "children": [
+        {
+          "type": "contains_all",
+          "path": "$.lines[*].fulfillmentNodeType",
+          "values": [
+            "JIT",
+            "FnL_SHIP",
+            "DS",
+            "FOC"
+          ],
+          "defaultResult": false
+        },
+        {
+          "type": "contains_all",
+          "path": "$.lines[*].nodeType",
+          "values": [
+            "STORE",
+            "Store",
+            "DC",
+            "DSV"
+          ],
+          "defaultResult": false
+        },
+        {
+          "type": "contains_all",
+          "path": "$.lines[?(@.fulfillmentNodeType == 'DS')].order.state",
+          "values": [
+            "PY",
+            "MZ",
+            "ARP",
+            "NG",
+            "KER",
+            "WB",
+            "DEL",
+            "GJ",
+            "TN",
+            "AP",
+            "UP",
+            "TG",
+            "MAH",
+            "KAR"
+          ],
+          "defaultResult": true
+        },
+        {
+          "type": "contains_all",
+          "path": "$.lines[?(@.fulfillmentNodeType == 'JIT')].order.state",
+          "values": [
+            "PY",
+            "GDD",
+            "UC",
+            "MR",
+            "AS",
+            "CH",
+            "UP",
+            "MAH",
+            "KAR"
+          ],
+          "defaultResult": true
+        }
+      ]
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-05-23T01:59:46.112Z"
+  },
+  "modifiedAt": {
+    "$date": "2025-07-31T10:45:36.537Z"
+  },
+  "_class": "com.ril.heraldfulfilmentengine.repo.entity.SettingsModel"
+}
+
+
+Curl for test the rule definition.
+
+curl 'http://10.166.181.98:30185/gateway/json-definition/try?type=rules' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-GB' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"input":{"Status":1400,"PaymentType":"COD","PartialShipment":"","Company":""},"definition":[{"type":"or","successResult":{"fulfillment":true},"failureResult":{"fulfillment":false},"children":[{"type":"equals","path":"$.metaData.panPresent","value":"Y","defaultResult":false}]}]}' \
+  --insecure

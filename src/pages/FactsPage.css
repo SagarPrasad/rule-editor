@@ -1,0 +1,80 @@
+.facts-page {
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+.facts-page h1 {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.search-section {
+  margin-bottom: 20px;
+}
+
+.facts-info {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #e7f3ff;
+  border-radius: 4px;
+}
+
+.facts-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.facts-table-container {
+  max-height: 600px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.fact-value {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #666;
+  word-break: break-all;
+}
+
+.badge-null {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.badge-object {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.badge-array {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge-string {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.badge-number {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.badge-boolean {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.payload-preview {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.5;
+  max-height: 500px;
+  overflow-y: auto;
+}
