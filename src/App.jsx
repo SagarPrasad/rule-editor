@@ -6,8 +6,12 @@ import FactsPage from './pages/FactsPage'
 import './App.css'
 
 function App() {
+  // Get base path from Vite's BASE_URL (set in vite.config.js)
+  // BASE_URL will be '/rule-editor/' for production, '/' for dev
+  const basePath = import.meta.env.BASE_URL || '/'
+  
   return (
-    <Router>
+    <Router basename={basePath}>
       <div className="App">
         <Routes>
           <Route path="/" element={<Navigate to="/rules" replace />} />
