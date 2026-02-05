@@ -10,8 +10,11 @@ function App() {
   // BASE_URL will be '/rule-editor/' for production, '/' for dev
   const basePath = import.meta.env.BASE_URL || '/'
   
+  // Remove trailing slash if present for basename
+  const basename = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath
+  
   return (
-    <Router basename={basePath}>
+    <Router basename={basename}>
       <div className="App">
         <Routes>
           <Route path="/" element={<Navigate to="/rules" replace />} />
