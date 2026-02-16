@@ -1,0 +1,294 @@
+/* Architecture diagram – compact for single-page view */
+
+.architecture-page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 50%, #f8fafc 100%);
+  padding-bottom: 1rem;
+}
+
+.architecture-header {
+  background: #1e293b;
+  color: #f8fafc;
+  padding: 0.5rem 0 0.65rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.architecture-header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.architecture-header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.architecture-header-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.architecture-export-btn {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #1e293b;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.architecture-export-btn:hover:not(:disabled) {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.architecture-export-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.architecture-back {
+  display: inline-block;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+  transition: color 0.2s;
+}
+
+.architecture-back:hover {
+  color: #f8fafc;
+}
+
+.architecture-header h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.architecture-subtitle {
+  margin: 0.1rem 0 0;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.architecture-loading {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.architecture-diagram {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+}
+
+/* Three-column layout: left | center | right */
+.architecture-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.architecture-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.architecture-col-center {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.architecture-center-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+/* Domain card – collapsible, compact header */
+.architecture-domain {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s;
+}
+
+.architecture-domain:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.architecture-domain-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.2rem;
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-left: 3px solid var(--domain-color, #475569);
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  transition: background 0.2s;
+}
+
+.architecture-domain-header:hover {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+.architecture-domain-header h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  flex: 1 1 auto;
+}
+
+.architecture-domain-subtitle {
+  display: block;
+  width: 100%;
+  margin-top: 0;
+  font-size: 0.68rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.architecture-domain-chevron {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  color: var(--domain-color, #475569);
+  margin-left: auto;
+}
+
+.architecture-domain.is-collapsed .architecture-domain-chevron {
+  margin-top: 0.1rem;
+}
+
+/* Services container – column-specific: left/right 1 per line, center 3 per line */
+.architecture-services {
+  padding: 0.4rem 0.75rem 0.6rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* Left panel: one item per line, shift content a little right */
+.architecture-col-left .architecture-services {
+  grid-template-columns: 1fr;
+  margin-left: 0.75rem;
+}
+
+/* Right panel: one item per line, shift content a little left */
+.architecture-col-right .architecture-services {
+  grid-template-columns: 1fr;
+  margin-right: 0.75rem;
+}
+
+/* Center section: 3 items per line, flow one after another */
+.architecture-col-center .architecture-services {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Each service as a box – compact */
+.architecture-service-box {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: #fafbfc;
+  font-size: 0.75rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.architecture-service-box:hover {
+  border-color: var(--domain-color, #94a3b8);
+  background: #f8fafc;
+}
+
+.architecture-service-name {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.1rem;
+}
+
+.architecture-service-desc {
+  color: #64748b;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  margin-top: 0.08rem;
+}
+
+.architecture-service-tech {
+  margin-top: 0.15rem;
+  font-size: 0.65rem;
+  color: var(--domain-color, #475569);
+  font-weight: 500;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 900px) {
+  .architecture-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .architecture-col-left {
+    order: 1;
+  }
+
+  .architecture-col-center {
+    order: 2;
+  }
+
+  .architecture-col-right {
+    order: 3;
+  }
+
+  .architecture-center-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Single column for all service boxes on small screens; reduce side shift */
+  .architecture-col-left .architecture-services,
+  .architecture-col-center .architecture-services,
+  .architecture-col-right .architecture-services {
+    grid-template-columns: 1fr;
+  }
+
+  .architecture-col-left .architecture-services {
+    margin-left: 0;
+  }
+
+  .architecture-col-right .architecture-services {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 901px) {
+  .architecture-domain-header h2 {
+    font-size: 0.95rem;
+  }
+}

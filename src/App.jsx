@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import RuleListPage from './pages/RuleListPage'
 import RuleEditorPage from './pages/RuleEditorPage'
 import FactsPage from './pages/FactsPage'
+import ArchitecturePage from './pages/ArchitecturePage'
 import './App.css'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/rules" element={<RuleListPage />} />
           <Route path="/rules/:ruleId" element={<RuleEditorPage />} />
           <Route path="/facts" element={<FactsPage />} />
+          <Route path="/architecture" element={<ArchitecturePage />} />
         </Routes>
       </div>
     </Router>

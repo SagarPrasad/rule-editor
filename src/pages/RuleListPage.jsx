@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import apiService from '../services/api'
 import './RuleListPage.css'
 
@@ -44,8 +44,11 @@ function RuleListPage() {
   return (
     <div className="rule-list-page">
       <div className="container">
-        <h1>Rule Engine Editor</h1>
-        
+        <div className="page-header-row">
+          <h1>Rule Engine Editor</h1>
+          <Link to="/architecture" className="nav-link-architecture">Supply Chain Current Landscape</Link>
+        </div>
+
         <div className="card filter-section">
           <h2>Filter Rules</h2>
           <div className="filter-controls">
