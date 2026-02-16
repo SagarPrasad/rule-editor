@@ -13,7 +13,15 @@ export const architectureDomains = [
       { name: 'Master Data Service', desc: 'Item / Node / Pincode / etc.', tech: 'Herald / Fynd' },
       { name: 'Document Service', desc: 'Document / PDF / Label generation and mgmt' },
       { name: 'WorkBench', desc: 'UI Mgmt' },
-      { name: 'Supply Chain Control Tower', desc: 'SLA monitoring', tech: 'RRA' },
+    ],
+  },
+  {
+    id: 'supply-chain-control-tower',
+    title: 'Supply Chain Control Tower',
+    subtitle: 'SLA monitoring, Exception management, Analytics',
+    color: '#2563eb',
+    services: [
+      { name: 'SLA monitoring', tech: 'RRA' },
       { name: 'Exception Management', desc: 'Over emails' },
       { name: 'What-if Simulation', desc: 'Excel' },
       { name: 'Digital Twin', desc: 'Supply chain systems', tech: 'RRA' },

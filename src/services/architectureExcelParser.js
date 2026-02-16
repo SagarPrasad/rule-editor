@@ -8,6 +8,7 @@ import * as XLSX from 'xlsx'
 
 const DOMAIN_CONFIG = {
   'Platform Service': { id: 'platform', color: '#2563eb', subtitle: 'Supporting systems & cross-cutting capabilities' },
+  'Supply Chain Control Tower': { id: 'supply-chain-control-tower', color: '#2563eb', subtitle: 'SLA monitoring, Exception management, Analytics' },
   'Order Lifecycle Mgmt': { id: 'order-lifecycle', color: '#059669', subtitle: 'Order management and fulfillment' },
   'Financial Services': { id: 'financial', color: '#b45309', subtitle: 'Invoicing, tax, and ledger management' },
   'Logistics Services': { id: 'logistics', color: '#0d9488', subtitle: 'Carrier, network, and transport management' },

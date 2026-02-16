@@ -39,15 +39,23 @@ npm install --save-dev gh-pages
 }
 ```
 
-3. Deploy:
+3. **Deploy (required for the site to update):**
 ```bash
 npm run deploy
 ```
+   **Important:** Pushing code to the `main` branch does **not** update the live site. The site is served from the `gh-pages` branch. You must run `npm run deploy` after every change you want to see on GitHub Pages. This command builds the app and pushes the `dist` folder to the `gh-pages` branch.
 
 4. Enable GitHub Pages in repository settings:
-   - Go to Settings > Pages
-   - Source: Deploy from a branch
-   - Branch: gh-pages
-   - Folder: / (root)
+   - Go to your repo → **Settings** → **Pages**
+   - **Source:** Deploy from a branch
+   - **Branch:** gh-pages
+   - **Folder:** / (root)
+   - Save
 
 The app will be available at: `https://sagarprasad.github.io/rule-editor/`
+
+### After making code changes
+
+1. Commit and push to `main`: `git add . && git commit -m "..." && git push`
+2. Update the live site: `npm run deploy`
+3. Wait a minute, then refresh the GitHub Pages URL (or do a hard refresh: Ctrl+Shift+R / Cmd+Shift+R)

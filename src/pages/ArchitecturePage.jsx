@@ -7,7 +7,7 @@ import { parseSystemsExcel } from '../services/architectureExcelParser'
 import './ArchitecturePage.css'
 
 const LAYOUT = {
-  left: ['platform'],
+  left: ['platform', 'supply-chain-control-tower'],
   center: [
     ['order-lifecycle'],
     ['financial'],
@@ -34,7 +34,7 @@ function ArchitecturePage() {
   useEffect(() => {
     let cancelled = false
     setLoading(true)
-    fetch('/Systems.xlsx')
+    fetch(`${import.meta.env.BASE_URL}Systems.xlsx`)
       .then((res) => {
         if (!res.ok) throw new Error('File not found')
         return res.arrayBuffer()
