@@ -11,9 +11,9 @@ const DOMAIN_CONFIG = {
   'Supply Chain Control Tower': { id: 'supply-chain-control-tower', color: '#2563eb', subtitle: 'SLA monitoring, Exception management, Analytics' },
   'Order Lifecycle Mgmt': { id: 'order-lifecycle', color: '#059669', subtitle: 'Order management and fulfillment' },
   'Financial Services': { id: 'financial', color: '#b45309', subtitle: 'Invoicing, tax, and ledger management' },
-  'Logistics Services': { id: 'logistics', color: '#0d9488', subtitle: 'Carrier, network, and transport management' },
-  'WareHouse Mgmt': { id: 'warehouse', color: '#7c3aed', subtitle: 'WMS, darkstore, and automation' },
-  'Omnichannel Mgmt': { id: 'omnichannel', color: '#be185d', subtitle: 'Storefront order management' },
+  'Logistics Services': { id: 'logistics', color: '#0d9488', subtitle: 'Transport, Carrier and network management' },
+  'WareHouse Mgmt': { id: 'warehouse', color: '#7c3aed', subtitle: 'WMS, darkstore Management, and automation' },
+  'Omnichannel Mgmt': { id: 'omnichannel', color: '#be185d', subtitle: 'Retail Store order management' },
   'Analytics System': { id: 'analytics', color: '#0369a1', subtitle: 'Reporting and data platforms' },
   'ESB (Enterprise Service Bus)': { id: 'esb', color: '#dc2626', subtitle: 'Integration, gateway, and identity' },
 }

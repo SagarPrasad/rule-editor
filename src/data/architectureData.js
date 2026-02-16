@@ -74,7 +74,7 @@ export const architectureDomains = [
   {
     id: 'warehouse',
     title: 'WareHouse Mgmt',
-    subtitle: 'WMS, darkstore, and automation',
+    subtitle: 'WMS, darkstore Management, and automation',
     color: '#7c3aed',
     services: [
       { name: 'WMS', desc: 'Picking, Packing, QC, Returns, Receiving, Dispatch', tech: 'SAP WM, Shipsy WM, Addverb WM, Viculum WM, RWOS WM' },
@@ -85,7 +85,7 @@ export const architectureDomains = [
   {
     id: 'omnichannel',
     title: 'Omnichannel Mgmt',
-    subtitle: 'Storefront order management',
+    subtitle: 'Retail Store order management',
     color: '#be185d',
     services: [
       { name: 'Online Store Order Mgmt', desc: 'Herald, ROMS' },
@@ -94,7 +94,7 @@ export const architectureDomains = [
   },
   {
     id: 'analytics',
-    title: 'Analytics System',
+    title: 'Retail Analytics System',
     subtitle: 'Reporting and data platforms',
     color: '#0369a1',
     services: [
