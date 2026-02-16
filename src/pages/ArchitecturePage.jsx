@@ -11,6 +11,7 @@ const LAYOUT = {
   center: [
     ['order-lifecycle'],
     ['financial'],
+    ['logistics'],
     ['warehouse'],
     ['omnichannel'],
     ['analytics'],
